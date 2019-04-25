@@ -10,7 +10,7 @@ CREATE TABLE Korisnik
 	datum_registracije   DATE NOT NULL,
 	vreme_registracije   TIME NOT NULL,
 	datum_poslednje_prijave DATE NOT NULL,
-	vreme_poslenje_prijave TIME NOT NULL
+	vreme_poslednje_prijave TIME NOT NULL
 );
 
 ALTER TABLE Korisnik
@@ -37,11 +37,9 @@ CREATE TABLE Sportski_objekat
 	adresa               VARCHAR(40) NOT NULL,
 	veb_sajt             VARCHAR(30) NULL,
 	slika                VARCHAR(40) NOT NULL,
-	username             VARCHAR(20) NOT NULL
-) AUTO_INCREMENT = 1;
-
-ALTER TABLE Sportski_objekat
-ADD CONSTRAINT XPKSportski_objekat PRIMARY KEY (IDObjekat);
+	username             VARCHAR(20) NOT NULL,
+	PRIMARY KEY(IDObjekat)
+);
 
 CREATE TABLE Termin
 (
@@ -57,11 +55,10 @@ CREATE TABLE Termin
 	opis                 VARCHAR(128) NOT NULL,
 	username             VARCHAR(20) NOT NULL,
 	datum_kreiranja      DATE NOT NULL,
-	status               CHAR NOT NULL CHECK ( status IN ('A', 'N') )
-) AUTO_INCREMENT = 1;
+	status               CHAR NOT NULL CHECK ( status IN ('A', 'N') ),
+	PRIMARY KEY(IDTermin)
+);
 
-ALTER TABLE Termin
-ADD CONSTRAINT XPKTermin PRIMARY KEY (IDTermin);
 
 CREATE TABLE Zahtev
 (
