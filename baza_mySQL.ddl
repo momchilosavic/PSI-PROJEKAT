@@ -9,8 +9,8 @@ CREATE TABLE Korisnik
 	broj_ocena           INTEGER NULL,
 	datum_registracije   DATE NOT NULL,
 	vreme_registracije   TIME NOT NULL,
-	datum_poslednje_prijave DATE NOT NULL,
-	vreme_poslednje_prijave TIME NOT NULL
+	datum_poslednje_prijave DATE NULL,
+	vreme_poslednje_prijave TIME NULL
 );
 
 ALTER TABLE Korisnik
