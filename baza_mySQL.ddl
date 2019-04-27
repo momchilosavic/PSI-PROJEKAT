@@ -2,15 +2,13 @@
 CREATE TABLE Korisnik
 (
 	username             VARCHAR(20) NOT NULL,
-	password             VARCHAR(20) NOT NULL,
+	password             VARCHAR(128) NOT NULL,
 	email                VARCHAR(40) NOT NULL,
 	grupa                CHAR NOT NULL CHECK ( grupa IN ('A', 'V', 'R') ),
 	zbir_ocena           INTEGER NULL,
 	broj_ocena           INTEGER NULL,
-	datum_registracije   DATE NOT NULL,
-	vreme_registracije   TIME NOT NULL,
-	datum_poslednje_prijave DATE NULL,
-	vreme_poslednje_prijave TIME NULL
+	datum_registracije   DATETIME NOT NULL,
+	datum_poslednje_prijave DATETIME NULL
 );
 
 ALTER TABLE Korisnik
@@ -23,8 +21,7 @@ CREATE TABLE Ocena
 	username_ocenjivac   VARCHAR(20) NOT NULL,
 	ocena                INTEGER NOT NULL CHECK ( ocena BETWEEN 0 AND 5 ),
 	razlog               VARCHAR(128) NOT NULL,
-	datum_ocenjivanja    DATE NOT NULL,
-	vreme_ocenjivanja    TIME NOT NULL
+	datum_ocenjivanja    DATETIME NOT NULL
 );
 
 ALTER TABLE Ocena
@@ -38,6 +35,7 @@ CREATE TABLE Sportski_objekat
 	veb_sajt             VARCHAR(30) NULL,
 	slika                VARCHAR(40) NOT NULL,
 	username             VARCHAR(20) NOT NULL,
+	datum_reklamiranja   DATETIME NOT NULL,
 	PRIMARY KEY(IDObjekat)
 );
 
@@ -47,14 +45,13 @@ CREATE TABLE Termin
 	naslov               VARCHAR(30) NOT NULL,
 	sport                VARCHAR(20) NOT NULL,
 	adresa               VARCHAR(40) NOT NULL,
-	vreme                TIME NOT NULL,
-	datum                DATE NOT NULL,
+	datum                DATETIME NOT NULL,
 	cena                 INTEGER NOT NULL CHECK ( cena >= 0 ),
 	broj_potrebnih_igraca INTEGER NOT NULL CHECK ( broj_potrebnih_igraca >= 0 ),
 	broj_prijavljenih_igraca INTEGER NOT NULL DEFAULT 0 CHECK ( broj_prijavljenih_igraca >= 0 ),
 	opis                 VARCHAR(128) NOT NULL,
 	username             VARCHAR(20) NOT NULL,
-	datum_kreiranja      DATE NOT NULL,
+	datum_kreiranja      DATETIME NOT NULL,
 	status               CHAR NOT NULL CHECK ( status IN ('A', 'N') ),
 	PRIMARY KEY(IDTermin)
 );
@@ -65,10 +62,8 @@ CREATE TABLE Zahtev
 	username             VARCHAR(20) NOT NULL,
 	IDTermin             INTEGER NOT NULL,
 	odgovor              CHAR NULL CHECK ( odgovor IN ('P', 'O') ),
-	datum_zahteva        DATE NOT NULL,
-	vreme_zahteva        TIME NOT NULL,
-	datum_odgovora       DATE NULL,
-	vreme_odgovora       TIME NULL
+	datum_zahteva        DATETIME NOT NULL,
+	datum_odgovora       DATETIME NULL
 );
 
 ALTER TABLE Zahtev
