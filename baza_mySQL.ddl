@@ -3,7 +3,7 @@ CREATE TABLE Korisnik
 (
 	username             VARCHAR(20) NOT NULL,
 	password             CHAR(60) NOT NULL,
-	email                VARCHAR(40) UNIQUE NOT NULL,
+	email                VARCHAR(40) NOT NULL,
 	grupa                CHAR NOT NULL CHECK ( grupa IN ('A', 'V', 'R', 'B') ),
 	zbir_ocena           INTEGER NULL,
 	broj_ocena           INTEGER NULL,
