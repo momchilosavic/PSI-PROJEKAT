@@ -1,0 +1,47 @@
+/*Branislav Bajić*/
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#flex-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    min-width: 600px;
+    margin: 10px 150px;
+}
+
+body > div:nth-child(1) > header, nav, section, aside, footer {
+    margin: 0.5%;
+}
+
+body > div:nth-child(1) > header {
+    order: 1;
+    margin-bottom: 0px;
+    flex: 0 1 100%;
+}
+
+body > div:nth-child(1) > nav {
+    order: 2;
+    margin-top: 0px;
+    flex: 0 1 100%;
+}
+
+body > div:nth-child(1) > section {
+    order: 3;
+    min-height: 300px;
+    max-height: 500px;
+    flex: 1;
+}
+
+body > div:nth-child(1) > aside {
+    order: 4;
+    max-height: 500px;
+    flex: 0 1 250px;
+}
+
+body > div:nth-child(1) > footer {
+    order: 5;
+	flex: 0 1 100%;
+}

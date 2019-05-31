@@ -1,0 +1,115 @@
+/*Branislav Bajić*/
+
+header img {
+    height: 300px;
+    width: 100%;
+    margin: 0px;
+    display: block;
+}
+
+nav {
+    background-color: #223;
+}
+
+#home_button a{
+    float: left;
+    padding: 15px 14px;
+    margin: 10px 10px 10px 20px;
+    background-image: url(images/home1.png);
+    background-repeat: no-repeat;
+}
+
+#home_button a:hover {
+    background-image: url(images/home2.png);
+    background-repeat: no-repeat;
+}
+
+#home_button a:active {
+    background-image: url(images/home3.png);
+    background-repeat: no-repeat;
+}
+
+nav ul {
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline-block;
+}
+
+nav ul li a {
+    display: inline-block;
+    color: beige;
+    text-decoration: none;
+    padding: 16px 14px;
+}
+
+nav ul li a:hover {
+    background-color: forestgreen;
+}
+
+nav ul li a:active {
+    color: red;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    min-width: 130px;
+}
+
+.dropdown-content a {
+    display: block;
+    background-color: #223;
+    border-bottom: 1px solid beige;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+section {
+    background: linear-gradient(45deg,darkgreen, forestgreen);
+    border-radius: 7px;
+    padding: 3%;
+}
+
+section img {
+    height: 50%;
+    width: 49%;
+    margin: 2% 0px;
+}
+
+aside {
+    background-color: #223;
+    border-radius: 7px;
+    color: white;
+    padding: 1%;
+    overflow: scroll;
+}
+
+aside .aside_article {
+    background-color: beige;
+    color: black;
+    height: 50%;
+    width: 100%;
+    margin: 3% 0;
+    padding: 1%;
+}
+
+aside .aside_article img{
+    height: 70%;
+    width: 100%;
+}
+
+footer {
+    background-color: #223;
+    border-radius: 7px;
+    color: beige;
+    padding: 20px;
+}
+
+footer > div {
+    margin: 10px 5px;
+}
+
