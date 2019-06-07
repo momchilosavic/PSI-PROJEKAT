@@ -43,7 +43,7 @@ $controllers = array('gost' =>      ['index', 'fudbal', 'kosarka', 'login', 'pra
                     'vip' =>        ['index','fudbal', 'kosarka', 'pravilnik', 
                                     'termini', 'prijavise', 'otkazi', 'otkazi_prihvacen', 'otkazi_kreiran', 'napravi',
                                     'obavestenja', 'prihvati', 'odbij',
-                                    'oceni', 'ucesnici', 'potvrdi',
+                                    'oceni', 'ucesnici', 'potvrdi', 'dodaj_reklamu',
                                     'reklame',
                                     'logout'],
                     'admin' =>      ['index','fudbal', 'kosarka', 'pravilnik', 
@@ -52,8 +52,8 @@ $controllers = array('gost' =>      ['index', 'fudbal', 'kosarka', 'login', 'pra
                                     'oceni', 'ucesnici', 'potvrdi',
                                     'reklame',
                                     'upravljaj_korisnicima', 'upravljaj_terminima', 'upravljaj_reklamama',
-                                    'banuj', 'odbanuj', 'unapredi', 'degradiraj', 'obrisi_termin', 'obrisi_reklamu',
-                                    'logout']);
+                                    'banuj', 'odbanuj', 'unapredi', 'degradiraj', 'obrisi_termin', 'obrisi_reklamu', 'reklame',
+                                    'dodaj_reklamu', 'logout']);
 
 if(array_key_exists($controller, $controllers)){
     if(in_array($action, $controllers[$controller])){

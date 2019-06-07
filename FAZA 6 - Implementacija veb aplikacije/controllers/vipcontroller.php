@@ -3,7 +3,8 @@
 /*
  * 
  * File: vipcontroller.php
- * Author: Momcilo Savic 0586/2016
+ * Author: Momcilo Savic 586/16
+ * Author: Branislav Bajić 0599/2016
  * 
  */
 
@@ -281,14 +282,74 @@ class VIPController{
      * @return float/string 
      */
     public static function dohvatiOcenu(){
-    require_once 'models/ocena.php';
-    return Ocena::dohvati($_SESSION['username']);
+		require_once 'models/ocena.php';
+		return Ocena::dohvati($_SESSION['username']);
     }
     
+	public function dodaj_reklamu() {
+		
+		$poruka = '';
+		if(isset($_POST['submit'])){
+			if(empty($_POST['reklame_naziv']) || empty($_POST['reklame_adresa']) || empty($_POST['reklame_url'])) {
+				$poruka = 'Sva polja moraju biti popunjena!';
+			}
+			else {
+				$name = $_FILES['reklame_slika']['name'];
+				$tmp_name = $_FILES['reklame_slika']['tmp_name'];
+				
+				if(isset($name)) {
+					if(!empty($name)) {
+						
+						
+						$file_type = strtolower(pathinfo($name,PATHINFO_EXTENSION));
+						$file_size = $_FILES['reklame_slika']["size"];
+						
+						if(file_exists($name)) {
+							$poruka = "Slika već postoji!";
+						}
+						else if($file_type != 'jpg' && $file_type != 'jpeg' && $file_type != 'png') {
+							$poruka = "Nedozvoljen format slike! (Samo .jpg, .jpeg, .png)";
+						}
+						else if($file_size > 1048576) {
+							$poruka = "Slika prelazi dozvoljenu veličinu!(1MB)";
+						}
+						else if($file_size == 0){
+							$poruka = "Morate izabrati sliku!";
+						}
+						else {
+							$location = realpath(dirname(getcwd())).'/TrebaMiIgrac/views/reklame/';
+							if(move_uploaded_file($tmp_name, $location.$name)) {
+								$poruka = 'Reklama je uspešno dodata.';
+								require_once 'models/baloni.php';
+								Balon::dodaj($_POST['reklame_naziv'], $_POST['reklame_adresa'], $_POST['reklame_url'], $name, $_SESSION['username']);
+								//$poruka = $_POST['reklame_naziv'].'-'.$_POST['reklame_adresa'].'-'.$_POST['reklame_url'].'-'.$name.'-'.$_SESSION['username'];
+								header("Location: ?controller=vip&action=reklame");
+							}
+							else {
+								$poruka = 'Desio se problem u dodavanju slike!';
+							}
+						}
+					}
+				}
+			}
+		}
+		$_POST['poruka'] = $poruka;
+		$this->reklame();
+	}
+	
     public function reklame() {
-        require_once 'views/vip/header.php';
-        require_once 'views/reklame.php';
-        require_once 'views/footer.php'; 
+		
+		require_once 'models/baloni.php';
+		if(count(self::$baloni = Balon::dohvati($_SESSION['username'])) <= 0) {
+			require_once 'views/vip/header.php';
+			require_once 'views/reklame.php';
+			require_once 'views/footer.php'; 
+		}
+		else {
+			require_once 'views/vip/header.php';
+			require_once 'views/moje_reklame.php';
+			require_once 'views/footer.php'; 
+		}
     }
     
     
