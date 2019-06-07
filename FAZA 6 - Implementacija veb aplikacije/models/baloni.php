@@ -3,15 +3,11 @@
 /*
  * 
  * File: baloni.php
- * Author: Momcilo Savic 0586/2016
+ * Author: Branislav Bajić 0599/2016
  * 
  */
 
-/**
- * Balon - Klasa za rad sa tabelom balon u bazi podataka
- * 
- * @version 1.0
- */
+
 class Balon{
     public $id;
     public $naziv;
@@ -21,6 +17,14 @@ class Balon{
     public $username;
     public $datum_reklamiranja;
     
+	public static function dodaj($naziv, $adresa, $veb_sajt, $slika, $username){
+		$now = new DateTime();
+		$sql = "INSERT INTO sportski_objekat(naziv, adresa, veb_sajt, slika, username, datum_reklamiranja)". " VALUES(?, ?, ?, ?, ?, ?)";
+		
+		$stmt = Connection::getInstance()->prepare($sql);
+		return $stmt->execute([$naziv, $adresa, $veb_sajt, $slika, $username, $now->format("Y-m-d H:i:s")]);
+	}
+	
     /**
      * Funkcija vraca sve sportske objekte iz baze podataka
      * 
@@ -46,5 +50,21 @@ class Balon{
         $stmt->bindParam("id", $balon);
         $stmt->execute();
     }
+	
+	/**
+	* Funkcija pronalazi sportski objekat na osnovu korisnika koji ga je kreirao
+	*
+	* @param string $username - username kreatora
+	*
+	* @return Balon
+	*
+	*/
+	public static function dohvati($username){
+		$sql = "SELECT * FROM sportski_objekat WHERE username = ?";
+		$stmt = Connection::getInstance()->prepare($sql);
+		$stmt->bindParam(1, $username);
+		$stmt->execute();
+		return $stmt->fetchAll(PDO::FETCH_CLASS, 'Balon');
+	}
     
 }
